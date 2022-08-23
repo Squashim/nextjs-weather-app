@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 const Weather = ({ data, units }) => {
-	console.log(units);
-
 	return (
 		<div className='w-full h-full max-w-[474px] mx-auto px-4 relative my-4 rounded-lg flex flex-col  text-gray-200 z-10'>
 			<div className='relative flex justify-center gap-20 sm:justify-between py-12 sm:pb-12 items-center '>
@@ -31,7 +29,10 @@ const Weather = ({ data, units }) => {
 				<div className='flex justify-between text-center'>
 					<div className='flex flex-col gap-2'>
 						<p className='font-bold text-2xl'>
-							{data.main.feels_like.toFixed(0)}&#176;
+							{units === "metric"
+								? data.main.temp.toFixed(0)
+								: ((data.main.temp * 9) / 5 + 32).toFixed(0)}
+							{units === "metric" ? "\u00b0C" : "\u00b0F"}
 						</p>
 						<p className='text-sm font-semibold sm:text-xl'>Feels Like</p>
 					</div>

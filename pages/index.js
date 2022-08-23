@@ -13,8 +13,7 @@ export default function Home() {
 	const [loading, setLoading] = useState(false);
 	const [units, setUnits] = useState("metric");
 
-	const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
-
+	const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
 	const fetchWeather = (e) => {
 		e.preventDefault();
 		setLoading(true);
@@ -28,8 +27,9 @@ export default function Home() {
 	const changeUnits = () => {
 		if (units === "metric") {
 			setUnits("imperial");
+		} else if (units === "imperial") {
+			setUnits("metric");
 		}
-		console.log(units);
 	};
 
 	if (loading) {
@@ -75,7 +75,7 @@ export default function Home() {
 					<div
 						className='items-center z-20 flex cursor-pointer text-center'
 						onClick={() => changeUnits()}>
-						<h2 className='mr-4 font-semibold '>
+						<h2 className='mr-4 '>
 							Change to {units === "metric" ? "Fahrenheit" : "Celsius"}
 						</h2>
 						<FaExchangeAlt size={25} />
