@@ -1,15 +1,17 @@
 import Head from "next/head";
 import Image from "next/image";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import Weather from "../components/Weather";
 import Spinner from "../components/Spinner";
+import { FaExchangeAlt } from "react-icons/fa";
 
 export default function Home() {
 	const [city, setCity] = useState("");
 	const [weather, setWeather] = useState({});
 	const [loading, setLoading] = useState(false);
+	const [isCelsius, setIsCelsius] = useState(true);
 
 	const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
 
@@ -46,7 +48,7 @@ export default function Home() {
 				/>
 
 				{/*Search*/}
-				<div className='relative flex justify-between px-3 items-center w-full h-[20vh] pt-4 text-white z-10'>
+				<div className='relative flex flex-col justify-end gap-5 px-3 items-center w-full h-[20vh] pt-4 text-white z-10'>
 					<form
 						onSubmit={fetchWeather}
 						className='flex justify-between items-center w-full max-w-[450px] sm:p-3 px-3 py-1 mx-auto bg-transparent border border-gray-300 text-white rounded-2xl'>
@@ -62,6 +64,15 @@ export default function Home() {
 							<BsSearch size={20} />
 						</button>
 					</form>
+
+					<div
+						className='items-center z-20 flex cursor-pointer text-center'
+						onClick={() => setIsCelsius(!isCelsius)}>
+						<h2 className='mr-4 font-semibold '>
+							Change to {isCelsius ? "Fahrenheit" : "Celsius"}
+						</h2>
+						<FaExchangeAlt size={25} />
+					</div>
 				</div>
 
 				{/*Weather*/}

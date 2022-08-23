@@ -1,24 +1,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { FaExchangeAlt } from "react-icons/fa";
 
 const Weather = ({ data }) => {
-	const [cel, setCel] = useState(true);
-	let temp;
-
-	function convertTemp() {
-		if (cel) {
-			temp = (data.main.temp * 9) / 5 + 32;
-		} else {
-			data.main.temp;
-		}
-	}
-
 	return (
 		<div className='w-full h-full max-w-[474px] mx-auto px-4 relative my-4 rounded-lg flex flex-col  text-gray-200 z-10'>
-			<div>
-				<FaExchangeAlt />
-			</div>
 			<div className='relative flex justify-center gap-20 sm:justify-between py-12 sm:pb-12 items-center '>
 				<div className='flex flex-col items-center'>
 					<Image
