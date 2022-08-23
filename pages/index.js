@@ -11,9 +11,9 @@ export default function Home() {
 	const [city, setCity] = useState("");
 	const [weather, setWeather] = useState({});
 	const [loading, setLoading] = useState(false);
-	const [isCelsius, setIsCelsius] = useState(true);
+	const [units, setUnits] = useState("metric");
 
-	const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
+	const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
 
 	const fetchWeather = (e) => {
 		e.preventDefault();
@@ -23,6 +23,13 @@ export default function Home() {
 		});
 		setCity("");
 		setLoading(false);
+	};
+
+	const changeUnits = () => {
+		if (units === "metric") {
+			setUnits("imperial");
+		}
+		console.log(units);
 	};
 
 	if (loading) {
@@ -67,16 +74,16 @@ export default function Home() {
 
 					<div
 						className='items-center z-20 flex cursor-pointer text-center'
-						onClick={() => setIsCelsius(!isCelsius)}>
+						onClick={() => changeUnits()}>
 						<h2 className='mr-4 font-semibold '>
-							Change to {isCelsius ? "Fahrenheit" : "Celsius"}
+							Change to {units === "metric" ? "Fahrenheit" : "Celsius"}
 						</h2>
 						<FaExchangeAlt size={25} />
 					</div>
 				</div>
 
 				{/*Weather*/}
-				{weather.main && <Weather data={weather} />}
+				{weather.main && <Weather data={weather} units={units} />}
 			</div>
 		);
 	}
