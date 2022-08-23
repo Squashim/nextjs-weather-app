@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import { FaExchangeAlt } from "react-icons/fa";
 
 const Weather = ({ data }) => {
-	console.log(data);
+	const [cel, setCel] = useState(true);
+	let temp;
+
+	function convertTemp() {
+		if (cel) {
+			temp = (data.main.temp * 9) / 5 + 32;
+		} else {
+			data.main.temp;
+		}
+	}
+
 	return (
-		<div className='relative flex flex-col justify-between max-w-[500px] w-full h-[90vh] m-auto p-4 text-gray-200 z-10'>
-			<div className='relative flex justify-between pt-12'>
+		<div className='w-full h-full max-w-[474px] mx-auto px-4 relative my-4 rounded-lg flex flex-col  text-gray-200 z-10'>
+			<div>
+				<FaExchangeAlt />
+			</div>
+			<div className='relative flex justify-center gap-20 sm:justify-between py-12 sm:pb-12 items-center '>
 				<div className='flex flex-col items-center'>
 					<Image
 						src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
@@ -13,29 +27,35 @@ const Weather = ({ data }) => {
 						width='100'
 						height='100'
 					/>
-					<p className='text-2xl'>{data.weather[0].main}</p>
+					<p className='sm:text-2xl text-xl font-semibold'>
+						{data.weather[0].main}
+					</p>
 				</div>
-				<p className='text-9xl'>{data.main.temp.toFixed(0)}&#176;</p>
+				<p className='sm:text-9xl text-6xl'>
+					{data.main.temp.toFixed(0)}&#176;
+				</p>
 			</div>
 
-			<div className='bg-black/60 relative p-8 rounded-md'>
+			<div className='bg-[#121212]/50 relative p-8 rounded-lg sm:mt-12'>
 				<p className='text-2xl text-center pb-6'>Weather in {data.name}</p>
 				<div className='flex justify-between text-center'>
-					<div>
+					<div className='flex flex-col gap-2'>
 						<p className='font-bold text-2xl'>
 							{data.main.feels_like.toFixed(0)}&#176;
 						</p>
-						<p className='text-xl'>Feels Like</p>
+						<p className='text-sm font-semibold sm:text-xl'>Feels Like</p>
 					</div>
-					<div>
+					<div className='flex flex-col gap-2'>
 						<p className='font-bold text-2xl'>{data.main.humidity}%</p>
-						<p className='text-xl'>Humidity</p>
+						<p className='text-sm font-semibold sm:text-xl'>Humidity</p>
 					</div>
-					<div>
+					<div className='flex flex-col gap-2'>
 						<p className='font-bold text-2xl'>
-							{data.wind.speed.toFixed(0)} KM/H
+							{data.wind.speed.toFixed(0)}
+							<span className='text-xs '> KM/H</span>
 						</p>
-						<p className='text-xl'>Winds</p>
+
+						<p className='text-sm font-semibold sm:text-xl'>Winds</p>
 					</div>
 				</div>
 			</div>

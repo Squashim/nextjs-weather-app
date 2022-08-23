@@ -46,14 +46,14 @@ export default function Home() {
 				/>
 
 				{/*Search*/}
-				<div className='relative flex justify-between items-center max-w-[500px] w-full m-auto pt-4 text-white z-10'>
+				<div className='relative flex justify-between px-3 items-center w-full h-[20vh] pt-4 text-white z-10'>
 					<form
 						onSubmit={fetchWeather}
-						className='flex justify-between items-center w-full m-auto p-3 bg-transparent border border-gray-300 text-white rounded-2xl'>
+						className='flex justify-between items-center w-full max-w-[450px] sm:p-3 px-3 py-1 mx-auto bg-transparent border border-gray-300 text-white rounded-2xl'>
 						<div>
 							<input
 								onChange={(e) => setCity(e.target.value)}
-								className='bg-transparent border-none text-white focus:outline-none text-2xl placeholder:text-gray-300'
+								className='bg-transparent border-none text-white w-full  focus:outline-none text-lg  sm:text-2xl placeholder:text-gray-300'
 								type='text'
 								placeholder='Search city'
 							/>
